@@ -11,6 +11,18 @@ export class CreateTransactionDto {
     grossAmount: number;
 
     @IsString()
+    name: string;
+
+    @IsString()
+    email: string;
+
+    @IsString()
+    productName: string;
+
+    @IsNumber()
+    productPrice: number;
+
+    @IsString()
     @IsNotEmpty()
     userId: string;
 

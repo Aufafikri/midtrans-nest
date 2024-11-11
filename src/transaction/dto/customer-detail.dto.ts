@@ -8,8 +8,4 @@ export class CustomerDetailsDto {
     @IsEmail()
     @IsNotEmpty()
     email: string;
-
-    @IsString()
-    @IsNotEmpty()
-    phone: string;
 }

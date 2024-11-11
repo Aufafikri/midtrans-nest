@@ -8,13 +8,12 @@ export class TransactionService {
     constructor(private prisma: PrismaService) {}
 
     public async createTransaction(createTransaction: CreateTransactionDto) {
-        const { grossAmount, orderId, productId, userId } = createTransaction;
+        const { grossAmount, orderId, productId, userId, name, email, productName, productPrice } = createTransaction;
 
         if (!grossAmount || !orderId) {
             throw new BadRequestException('grossAmount dan orderId harus diisi.');
         }
 
-        // Inisialisasi Snap
         const snap = new midtransClient.Snap({
             isProduction: false,
             serverKey: process.env.MIDTRANS_CLIENT_SERVER,
@@ -23,18 +22,18 @@ export class TransactionService {
 
         const parameter = {
             transaction_details: {
-                order_id: orderId,
-                gross_amount: grossAmount,
+                "order_id": orderId,
+                "gross_amount": grossAmount,
             },
             item_details: [{
+                "id": productId,
                 "price": grossAmount,
                 "quantity": 1,
-                "name": "evst",
-                "brand": "evst brand wei"
+                "name": productName,
             }],
             customer_details: {
-                name: 'example',
-                email: 'example@gmail.com',
+                first_name: name,
+                email: email,
             },
         };
 
