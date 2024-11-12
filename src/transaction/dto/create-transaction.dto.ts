@@ -16,6 +16,9 @@ export class CreateTransactionDto {
     @IsString()
     email: string;
 
+    @IsNumber()
+    quantity: number;
+
     @IsString()
     productName: string;
 

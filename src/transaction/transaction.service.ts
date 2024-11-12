@@ -8,7 +8,7 @@ export class TransactionService {
     constructor(private prisma: PrismaService) {}
 
     public async createTransaction(createTransaction: CreateTransactionDto) {
-        const { grossAmount, orderId, productId, userId, name, email, productName, productPrice } = createTransaction;
+        const { grossAmount, orderId, productId, userId, name, email, productName, productPrice, quantity } = createTransaction;
 
         if (!grossAmount || !orderId) {
             throw new BadRequestException('grossAmount dan orderId harus diisi.');
@@ -20,7 +20,7 @@ export class TransactionService {
             clientKey: process.env.MIDTRANS_CLIENT_KEY,
         });
 
-        const calculatedGrossAmount = productPrice * 4
+        const calculatedGrossAmount = productPrice * quantity
 
         const parameter = {
             transaction_details: {
@@ -30,7 +30,7 @@ export class TransactionService {
             item_details: [{
                 "id": productId,
                 "price": productPrice,
-                "quantity": 4,
+                "quantity": quantity,
                 "name": productName,
             }],
             customer_details: {
