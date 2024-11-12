@@ -20,15 +20,17 @@ export class TransactionService {
             clientKey: process.env.MIDTRANS_CLIENT_KEY,
         });
 
+        const calculatedGrossAmount = productPrice * 4
+
         const parameter = {
             transaction_details: {
                 "order_id": orderId,
-                "gross_amount": grossAmount,
+                "gross_amount": calculatedGrossAmount,
             },
             item_details: [{
                 "id": productId,
-                "price": grossAmount,
-                "quantity": 1,
+                "price": productPrice,
+                "quantity": 4,
                 "name": productName,
             }],
             customer_details: {
