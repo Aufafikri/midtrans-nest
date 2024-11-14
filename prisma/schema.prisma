@@ -41,12 +41,20 @@ model Product {
   updatedAt DateTime @updatedAt
 }
 
+enum PaymentStatus {
+  pending
+  success
+  failed
+  expire
+  cancel
+}
+
 model Transaction {
   id            String @id @default(cuid())
   orderId       String @unique
   userId        String
   productId     String
-  status        String
+  status        PaymentStatus?
   amount        Int
   paymentMethod String
 

@@ -36,6 +36,14 @@ export class TransactionService {
             customer_details: {
                 first_name: name,
                 email: email,
+                shipping_address: {
+                    first_name: name,
+                    phone: 12345678,
+                    address: "jatimakmur pride",
+                    city: "bekasi",
+                    postal_code: '12212',
+                    country_code: "IDN"
+                }
             },
         };
 
