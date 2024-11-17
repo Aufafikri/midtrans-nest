@@ -8,7 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
 import { JwtModule } from '@nestjs/jwt';
-import { LocalStrategy } from './auth/strategies/local.strategy';
+import { JwtStrategy } from './auth/strategies/local.strategy';
 import { MidtransModule } from '@ruraim/nestjs-midtrans';
 
 @Module({
@@ -33,7 +33,7 @@ import { MidtransModule } from '@ruraim/nestjs-midtrans';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, LocalStrategy],
+  providers: [AppService, JwtStrategy, JwtService],
   exports: [JwtModule],
 })
 export class AppModule {}

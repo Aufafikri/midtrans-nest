@@ -12,17 +12,17 @@ export class AuthService {
         const {email, password} = createLogin
         const user = await this.userService.getOneUserEmail(email)
 
-        // if (!user || !(await bcrypt.compare(password, user.password))) {
-        //     throw new UnauthorizedException('invalid credentials');
-        //   }
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            throw new UnauthorizedException('invalid credentials');
+          }
 
-        // if(!user) {
-        //     throw new UnauthorizedException()
-        // }
+        if(!user) {
+            throw new UnauthorizedException()
+        }
 
-        // if(!(await bcrypt.compare(password, user.password))) {
-        //     throw new UnauthorizedException()
-        // }
+        if(!(await bcrypt.compare(password, user.password))) {
+            throw new UnauthorizedException()
+        }
       
           const payload = {
             sub: user.id,

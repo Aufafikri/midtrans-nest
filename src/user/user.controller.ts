@@ -7,11 +7,18 @@ import { LocalAuthGuard } from 'src/auth/guards/local.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  // @Get('/:userId')
+  // public async getAllUser(@Param('userId') userId: string ) {
+  //   return this.userService.getOneUserById(userId)
+  // }
+
   @UseGuards(LocalAuthGuard)
   @Get('/profile')
   public async getUserById(@Request() req: any) {
-    const userProfile = await this.userService.getOneUserById(req.user.id);
-    return userProfile;
+    console.log('Headers:', req.headers); // Debug header
+    console.log('User:', req.user);  
+    const profile = await this.userService.getOneUserById(req.user.id)
+    return profile
   }
 
   @Post('/register')
