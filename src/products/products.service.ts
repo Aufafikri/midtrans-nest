@@ -21,6 +21,29 @@ export class ProductsService {
     public async getAllProducts() {
         return this.prisma.product.findMany({})
     }
+
+    public async getPaginatedProducts (page: number, limit: number) {
+        const skip = (page - 1) * limit
+        console.log(`Fetching products - Page: ${page}, Limit: ${limit}, Skip: ${skip}`);
+        const products = await this.prisma.product.findMany({
+            skip,
+            take: limit
+        })
+
+        const total = await this.prisma.product.count()
+
+        const totalPages = Math.ceil(total / limit);
+
+        console.log(`Total products: ${total}, Total Pages: ${totalPages}`);
+
+        return {
+            products,
+            page,
+            limit,
+            total,
+            totalPages
+        }
+    }
     
     public async getProductById(productId: string) {
         return this.prisma.product.findUnique({

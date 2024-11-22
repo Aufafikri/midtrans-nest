@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 
@@ -6,9 +6,14 @@ import { CreateProductDto } from './dto/create-product.dto';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  // @Get()
+  // public async getAllProducts() {
+  //   return this.productsService.getAllProducts()
+  // }
+
   @Get()
-  public async getAllProducts() {
-    return this.productsService.getAllProducts()
+  public async getPaginatedProducts (@Query('page') page: number = 1, @Query('limit') limit: number = 8) {
+    return this.productsService.getPaginatedProducts(Number(page), Number(limit))
   }
 
   @Get('/:productId')
