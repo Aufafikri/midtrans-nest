@@ -25,4 +25,12 @@ export class MerchantService {
             message: 'check your email address to verified your email'
         }
     }
+
+    public async getMerchantByEmail(email: string) {
+        return this.prisma.merchant.findUnique({
+            where: {
+                email
+            }
+        })
+    }
 }
