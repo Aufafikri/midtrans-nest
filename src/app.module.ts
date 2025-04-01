@@ -10,6 +10,8 @@ import { JwtService } from '@nestjs/jwt';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/strategies/local.strategy';
 import { MidtransModule } from '@ruraim/nestjs-midtrans';
+import { MerchantModule } from './merchant/merchant.module';
+import { MailsModule } from './mails/mails.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { MidtransModule } from '@ruraim/nestjs-midtrans';
     ProductsModule,
     TransactionModule,
     AuthModule,
+    MerchantModule,
+    MailsModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy, JwtService],

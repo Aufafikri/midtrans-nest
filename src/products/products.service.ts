@@ -8,14 +8,12 @@ export class ProductsService {
 
     public async createProduct(createProduct: CreateProductDto) {
        const product = await this.prisma.product.create({
-            data: {
-                ...createProduct
-            }
-        })
+        data: {
+            ...createProduct
+        }
+       })
 
-        console.log(product)
-        
-        return product
+       return product
     }
 
     public async getAllProducts() {

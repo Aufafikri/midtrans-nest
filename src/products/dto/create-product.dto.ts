@@ -11,8 +11,8 @@ export class CreateProductDto {
     description?: string;
 
     @IsString()
-    image: string;
+    image: string[];
 
-    @IsString()
-    userId: string;
+    // @IsString()
+    // merchantId: string;
 }
