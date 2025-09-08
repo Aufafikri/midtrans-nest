@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateLoginDto } from './dto/login.dto';
+import { CreateMerchantDto } from 'src/merchant/dto/create-merchant.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -11,5 +12,8 @@ export class AuthController {
     return this.authService.login(createLoginDto)
   }
 
-  // @Post('/merchant/login')
+  @Post('/merchant/login')
+  public async loginMerchant(@Body() createMerchant: CreateMerchantDto ) {
+    return this.authService.merchantLogin(createMerchant)
+  }
 }

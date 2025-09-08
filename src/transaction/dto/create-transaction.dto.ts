@@ -32,4 +32,7 @@ export class CreateTransactionDto {
     @IsString()
     @IsNotEmpty()
     productId: string;
+
+    @IsString()
+    bank: string
 }

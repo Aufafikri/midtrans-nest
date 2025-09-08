@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { error } from 'console';
 import * as nodemailer from 'nodemailer';
-import { PrismaService } from 'src/libs/prisma.service';
+import { PrismaService } from '../libs/prisma.service';
 
 @Injectable()
 export class MailsService {

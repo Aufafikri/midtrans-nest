@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
-import { TransactionModule } from './transaction/transaction.module';
 import { PrismaModule } from './libs/prisma.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
@@ -12,6 +11,13 @@ import { JwtStrategy } from './auth/strategies/local.strategy';
 import { MidtransModule } from '@ruraim/nestjs-midtrans';
 import { MerchantModule } from './merchant/merchant.module';
 import { MailsModule } from './mails/mails.module';
+import { MerchantStrategy } from './auth/strategies/merchant.strategy';
+import { SocketGateway } from './socket/socket/socket.gateway';
+import { SocketModule } from './socket/socket/socket.module';
+import { PaymentModule } from './payment/payment.module';
+import { PaymentGateway } from './payment/payment.gateway';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { DataModule } from './data/data.module';
 
 @Module({
   imports: [
@@ -31,13 +37,16 @@ import { MailsModule } from './mails/mails.module';
     UserModule,
     PrismaModule,
     ProductsModule,
-    TransactionModule,
     AuthModule,
     MerchantModule,
     MailsModule,
+    SocketModule,
+    PaymentModule,
+    CloudinaryModule,
+    DataModule
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy, JwtService],
+  providers: [AppService, JwtStrategy, JwtService, MerchantStrategy, SocketGateway, PaymentGateway],
   exports: [JwtModule],
 })
 export class AppModule {}

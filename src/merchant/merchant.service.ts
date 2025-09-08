@@ -3,6 +3,7 @@ import { PrismaService } from 'src/libs/prisma.service';
 import { CreateMerchantDto } from './dto/create-merchant.dto';
 import { MailsService } from 'src/mails/mails.service';
 import * as bcrypt from 'bcrypt'
+// import * as crypto from 'crypto'
 
 @Injectable()
 export class MerchantService {
@@ -30,6 +31,14 @@ export class MerchantService {
         return this.prisma.merchant.findUnique({
             where: {
                 email
+            }
+        })
+    }
+
+    public async getMerchantById(merchantId: string) {
+        return this.prisma.merchant.findUnique({
+            where: {
+                id: merchantId
             }
         })
     }

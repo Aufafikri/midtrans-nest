@@ -13,6 +13,6 @@ export class CreateProductDto {
     @IsString()
     image: string[];
 
-    // @IsString()
-    // merchantId: string;
+    @IsString()
+    merchantId: string;
 }

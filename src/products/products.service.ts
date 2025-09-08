@@ -25,7 +25,10 @@ export class ProductsService {
         console.log(`Fetching products - Page: ${page}, Limit: ${limit}, Skip: ${skip}`);
         const products = await this.prisma.product.findMany({
             skip,
-            take: limit
+            take: limit,
+            include: {
+                Merchant: true
+            }
         })
 
         const total = await this.prisma.product.count()
@@ -47,6 +50,16 @@ export class ProductsService {
         return this.prisma.product.findUnique({
             where: {
                 id: productId
+            }
+        })
+    }
+
+    public async getProductByMerchantById(merchantId: string) {
+        return this.prisma.product.findMany({
+            where: {
+                Merchant: {
+                    id: merchantId
+                }
             }
         })
     }
